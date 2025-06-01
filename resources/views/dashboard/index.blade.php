@@ -1,0 +1,1 @@
+@extends ("main", ["title" => "Dashboard"])
