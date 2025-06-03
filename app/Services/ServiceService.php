@@ -9,7 +9,7 @@ class ServiceService extends BaseService
 {
     public function get(): Collection
     {
-        return ServiceModel::where("isActive", "=", true)->get();
+        return ServiceModel::all();
     }
     public function getById(int $id)
     {
@@ -24,11 +24,15 @@ class ServiceService extends BaseService
     }
     public function create(Request $request): void
     {
-        return;
+        $model = new ServiceModel();
+
+        $model->save();
     }
     public function edit(Request $request, int $id): void
     {
-        return;
+        $model = ServiceModel::find($id);
+
+        $model->save();
     }
 
 }

@@ -9,7 +9,7 @@ class PetService extends BaseService
 {
     public function get(): Collection
     {
-        return PetModel::where("isActive", "=", true)->get();
+        return PetModel::all();
     }
     public function getById(int $id)
     {

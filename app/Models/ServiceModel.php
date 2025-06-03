@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceModel extends Model
 {
     use HasFactory;
-    const UPDATED_AT = "EditDateTime";
-    const CREATED_AT = "CreationDateTime";
+    const UPDATED_AT = "dateEdited";
+    const CREATED_AT = "dateCreated";
     protected $table = "Services";
-    protected $primaryKey = "Id";
+    protected $primaryKey = "id";
 }

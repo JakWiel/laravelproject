@@ -9,7 +9,7 @@ class BookingServiceService extends BaseService
 {
     public function get(): Collection
     {
-        return BookingServiceModel::get();
+        return BookingServiceModel::all();
     }
     public function getById(int $id)
     {

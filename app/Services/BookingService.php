@@ -10,7 +10,7 @@ class BookingService extends BaseService
 {
     public function get(): Collection
     {
-        return BookingModel::where("isActive", "=", true)->get();
+        return BookingModel::all();
     }
     public function getById(int $id)
     {

@@ -13,24 +13,15 @@
             </div>
 
             <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <label for="description" class="form-label">Description</label>
+                <input type="description" class="form-control" id="description" name="description" required>
             </div>
 
             <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" required>
             </div>
-
-            <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <select class="form-select" id="role" name="role" required>
-                    <option value="">-- Select Role --</option>
-                    <option value="admin">Admin</option>
-                    <option value="owner">Owner</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Create User</button>
+            <button type="submit" class="btn btn-primary">Create Service</button>
             <a href="/users" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</a>
         </form>
     </div>

@@ -25,7 +25,6 @@ class UserController extends Controller
     }
     public function create()
     {
-        // $attachments = (new AttachmentService())->get();
         return view("users.create");
     }
     public function addToDB(Request $request)

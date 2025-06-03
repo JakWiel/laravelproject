@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class PetModel extends Model
 {
     use HasFactory;
-    const UPDATED_AT = "EditDateTime";
-    const CREATED_AT = "CreationDateTime";
+    const UPDATED_AT = "dateEdited";
+    const CREATED_AT = "dateCreated";
     protected $table = "Pets";
     protected $primaryKey = "id";
     public function user(): BelongsTo

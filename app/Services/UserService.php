@@ -19,24 +19,39 @@ class UserService extends BaseService
     }
     public function create(Request $request): void
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|required',
+            'role' => 'required|string|in:admin,owner',
+        ]);
+
         $model = new UserModel();
-        $model->name = $request->input("name");
-        $model->email = $request->input("email");
-        $model->password = Hash::make($request->input('password'));
-        $model->role = $request->input("role");
-        $model->isActive = true;
+        $model->name = $validatedData['name'];
+        $model->email = $validatedData['email'];
+        $model->password = Hash::make($validatedData['password']);
+        $model->role = $validatedData['role'];
         $model->save();
     }
     public function edit(Request $request, int $id): void
     {
-        $model = UserModel::find($id);
-        $model->name = $request->input("name");
-        // $model->password = $request->input("password");
-        $model->email = $request->input("email");
-        $model->role = $request->input("role");
-        if ($request->has('password') && !empty($request->input('password'))) {
-            $model->password = Hash::make($request->input('password'));
+        $model = UserModel::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|required',
+            'role' => 'required|string|in:admin,owner'
+        ]);
+
+        $model->name = $validatedData['name'];
+        $model->email = $validatedData['email'];
+        $model->role = $validatedData['role'];
+
+        if (!empty($validatedData['password'])) {
+            $model->password = Hash::make($validatedData['password']);
         }
+
         $model->save();
     }
     public function delete(int $id): void

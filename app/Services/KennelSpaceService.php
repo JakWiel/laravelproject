@@ -11,7 +11,7 @@ class KennelSpaceService extends BaseService
 
     public function get(): Collection
     {
-        return KennelSpaceModel::where("isActive", "=", true)->get();
+        return KennelSpaceModel::all();
     }
     public function getById(int $id)
     {

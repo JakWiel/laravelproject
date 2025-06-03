@@ -30,8 +30,10 @@
                     <option value="owner">Owner</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary">Create User</button>
-            <a href="/users" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</a>
+            <div class="d-flex justify-content-end ">
+                <button type="submit" class="btn btn-primary me-3">Create User</button>
+                <a href="/users" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</a>
+            </div>
         </form>
     </div>
 </div>

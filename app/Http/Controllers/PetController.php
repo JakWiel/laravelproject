@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\PetService;
-use Request;
+use Illuminate\Http\Request;
 
 class PetController extends Controller
 {
@@ -19,12 +19,26 @@ class PetController extends Controller
     }
     public function create()
     {
-        // $attachments = (new AttachmentService())->get();
         return view("pets.create");
     }
     public function addToDB(Request $request)
     {
         $this->service->create($request);
+        return redirect("/pets");
+    }
+    public function edit(int $id)
+    {
+        $model = $this->service->getById($id);
+        return view("pets.edit", ["model" => $model]);
+    }
+    public function update(Request $request, int $id)
+    {
+        $this->service->edit($request, $id);
+        return redirect("/pets");
+    }
+    public function delete(int $id)
+    {
+        $this->service->delete($id);
         return redirect("/pets");
     }
 }

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BookingServiceModel extends Model
 {
     use HasFactory;
-    const UPDATED_AT = "EditDateTime";
-    const CREATED_AT = "CreationDateTime";
+    const UPDATED_AT = "dateEdited";
+    const CREATED_AT = "dateCreated";
     protected $table = "booking_services";
-    protected $primaryKey = "Id";
+    protected $primaryKey = "id";
 }

@@ -23,4 +23,24 @@ class BookingController extends Controller
     {
         return view("bookings.create");
     }
+    public function addToDB(Request $request)
+    {
+        $this->service->create($request);
+        return redirect("/bookings");
+    }
+    public function edit(int $id)
+    {
+        $model = $this->service->getById($id);
+        return view("bookings.edit", ["model" => $model]);
+    }
+    public function update(Request $request, int $id)
+    {
+        $this->service->edit($request, $id);
+        return redirect("/bookings");
+    }
+    public function delete(int $id)
+    {
+        $this->service->delete($id);
+        return redirect("/bookings");
+    }
 }
