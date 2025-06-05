@@ -77,10 +77,10 @@
             });
         });
         $(".edit-event").on("click", function (e) {
-            console.log(this);
-            const elem = this;
+            e.preventDefault();
+            const clickedId = $(this).attr('href').split('/').pop();
             $.ajax({
-                url: "/services/edit/{{$model->id}}",
+                url: "/services/edit/" + clickedId,
                 method: "get",
                 data: { _token: "{{ csrf_token() }}" },
                 dataType: "html",

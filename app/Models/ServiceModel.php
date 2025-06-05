@@ -12,4 +12,10 @@ class ServiceModel extends Model
     const CREATED_AT = "dateCreated";
     protected $table = "Services";
     protected $primaryKey = "id";
+    public function bookingServices()
+    {
+        return $this->hasMany(BookingServiceModel::class);
+    }
+
+
 }

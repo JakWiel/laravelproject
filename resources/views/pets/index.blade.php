@@ -11,7 +11,7 @@
         </div>
 
         <div class="w-50">
-            <form class="d-flex" role="search" action="/users/search" method="GET">
+            <form class="d-flex" role="search" action="/pets/search" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" />
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
@@ -72,7 +72,7 @@
             console.log(this);
             const elem = this;
             $.ajax({
-                url: "/users/create",
+                url: "/pets/create",
                 method: "get",
                 data: { _token: "{{ csrf_token() }}" },
                 dataType: "html",
@@ -83,10 +83,10 @@
             });
         });
         $(".edit-event").on("click", function (e) {
-            console.log(this);
-            const elem = this;
+            e.preventDefault();
+            const clickedId = $(this).attr('href').split('/').pop();
             $.ajax({
-                url: "/users/edit/{{$model->id}}",
+                url: "/pets/edit/" + clickedId,
                 method: "get",
                 data: { _token: "{{ csrf_token() }}" },
                 dataType: "html",

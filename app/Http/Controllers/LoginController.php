@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Services\LoginService;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Models\UserModel;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -32,9 +34,22 @@ class LoginController extends Controller
             ? redirect('/dashboard')
             : redirect('/');
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        $this->service->logout();
+        $this->service->logout($request);
+        return redirect('/');
+    }
+    public function register(Request $request)
+    {
+        $user = $this->service->register($request);
+
+        // Store user in session
+        Session::put('user', [
+            'id' => $user->id,
+            'email' => $user->email,
+            'role' => $user->role,
+        ]);
+
         return redirect('/');
     }
 }

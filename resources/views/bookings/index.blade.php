@@ -83,10 +83,10 @@
                 });
             });
             $(".edit-event").on("click", function (e) {
-                console.log(this);
-                const elem = this;
+                e.preventDefault();
+                const clickedId = $(this).attr('href').split('/').pop();
                 $.ajax({
-                    url: "/booking/edit/{{$model->id}}",
+                    url: "/booking/edit/" + clickedId,
                     method: "get",
                     data: { _token: "{{ csrf_token() }}" },
                     dataType: "html",

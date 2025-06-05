@@ -43,7 +43,7 @@
                         <td>{{ $model->dateDeleted ?? 'N/A' }}</td>
                         <td>
                             <a href="users/edit/{{$model->id}}" class="btn btn-sm btn-warning edit-event" data-bs-toggle="modal"
-                                data-bs-target="#editModal"> Edit </a>
+                                data-bs-target="#editModal" id="{{ $model->id }}"> Edit </a>
                             <form action="/users/delete/{{$model->id}}" method="POST" style="display:inline-block;"
                                 onsubmit="return confirm('Are you sure?');">
                                 @csrf
@@ -77,10 +77,10 @@
             });
         });
         $(".edit-event").on("click", function (e) {
-            console.log(this);
-            const elem = this;
+            e.preventDefault();
+            const clickedId = $(this).attr('href').split('/').pop();
             $.ajax({
-                url: "/users/edit/{{$model->id}}",
+                url: "/users/edit/" + clickedId,
                 method: "get",
                 data: { _token: "{{ csrf_token() }}" },
                 dataType: "html",

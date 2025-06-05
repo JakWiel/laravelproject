@@ -35,22 +35,17 @@ class UserService extends BaseService
     }
     public function edit(Request $request, int $id): void
     {
-        $model = UserModel::findOrFail($id);
+        $model = UserModel::find($id);
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'password' => 'required|string|required',
             'role' => 'required|string|in:admin,owner'
         ]);
 
         $model->name = $validatedData['name'];
         $model->email = $validatedData['email'];
         $model->role = $validatedData['role'];
-
-        if (!empty($validatedData['password'])) {
-            $model->password = Hash::make($validatedData['password']);
-        }
 
         $model->save();
     }

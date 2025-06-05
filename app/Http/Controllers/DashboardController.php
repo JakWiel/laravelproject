@@ -15,8 +15,9 @@ class DashboardController extends Controller
         $petsCount = $this->getPetsNumber();
         $bookingsCount = $this->getBookingsNumber();
         $kennelsCount = $this->getKennelsNumber();
+        $userEmail = session('user.email');
 
-        return view('dashboard.index', compact('usersCount', 'petsCount', 'bookingsCount', 'kennelsCount'));
+        return view('dashboard.index', compact('usersCount', 'petsCount', 'bookingsCount', 'kennelsCount', 'userEmail'));
     }
 
     public function getUsersNumber()
@@ -36,6 +37,6 @@ class DashboardController extends Controller
 
     public function getKennelsNumber()
     {
-        return KennelSpaceModel::count();
+        return KennelSpaceModel::where('availability_status', 'available')->count();
     }
 }

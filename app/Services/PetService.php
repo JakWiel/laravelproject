@@ -17,13 +17,22 @@ class PetService extends BaseService
     }
     public function create(Request $request): void
     {
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            'breed' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'medical_notes' => 'nullable|string',
+            'profile_pic' => 'nullable|string',
+        ]);
+
         $model = new PetModel();
-        $model->user_id = $request->input("user_id");
-        $model->name = $request->input("name");
-        $model->breed = $request->input("breed");
-        $model->age = $request->input("age");
-        $model->medical_notes = $request->input("medical_notes");
-        $model->profile_pic = $request->input("profile_pic");
+        $model->user_id = $validated['user_id'];
+        $model->name = $validated['name'];
+        $model->breed = $validated['breed'];
+        $model->age = $validated['age'];
+        $model->medical_notes = $validated['medical_notes'] ?? '';
+        $model->profile_pic = $validated['profile_pic'] ?? '';
         $model->isActive = true;
         $model->save();
     }
@@ -36,7 +45,26 @@ class PetService extends BaseService
     }
     public function edit(Request $request, int $id): void
     {
-        return;
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'name' => 'required|string|max:255',
+            'breed' => 'required|string|max:255',
+            'age' => 'required|integer|min:0',
+            'medical_notes' => 'nullable|string',
+            'profile_pic' => 'nullable|string',
+        ]);
+
+        $model = PetModel::findOrFail($id); // Load the existing pet or throw 404
+
+        $model->user_id = $validated['user_id'];
+        $model->name = $validated['name'];
+        $model->breed = $validated['breed'];
+        $model->age = $validated['age'];
+        $model->medical_notes = $validated['medical_notes'] ?? '';
+        $model->profile_pic = $validated['profile_pic'] ?? '';
+
+        $model->save();
     }
+
 
 }

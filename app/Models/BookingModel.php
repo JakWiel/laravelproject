@@ -12,4 +12,17 @@ class BookingModel extends Model
     const CREATED_AT = "dateCreated";
     protected $table = "Bookings";
     protected $primaryKey = "id";
+    public function pet()
+    {
+        return $this->belongsTo(PetModel::class);
+    }
+    public function kennelSpace()
+    {
+        return $this->belongsTo(KennelSpaceModel::class);
+    }
+    public function bookingServices()
+    {
+        return $this->hasMany(BookingServiceModel::class);
+    }
+
 }

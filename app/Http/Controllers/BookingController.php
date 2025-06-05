@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingModel;
+use App\Models\KennelSpaceModel;
+use App\Models\ServiceModel;
 use App\Services\BookingService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -21,12 +23,15 @@ class BookingController extends Controller
     }
     public function create()
     {
-        return view("bookings.create");
+        $kennelSpaces = KennelSpaceModel::where('availability_status', 'available')->get();
+        $services = ServiceModel::where('isActive', true)->get();
+        return view("bookings.create", compact('kennelSpaces', 'services'));
     }
     public function addToDB(Request $request)
     {
         $this->service->create($request);
-        return redirect("/bookings");
+        $userRole = session('user.role');
+        return $userRole === 'admin' ? redirect("/bookings") : redirect("/");
     }
     public function edit(int $id)
     {

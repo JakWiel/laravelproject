@@ -12,4 +12,10 @@ class KennelSpaceModel extends Model
     const CREATED_AT = "dateCreated";
     protected $table = "Kennel_Spaces";
     protected $primaryKey = "id";
+    public function bookings()
+    {
+        return $this->hasMany(BookingModel::class);
+    }
+
+
 }

@@ -12,4 +12,13 @@ class BookingServiceModel extends Model
     const CREATED_AT = "dateCreated";
     protected $table = "booking_services";
     protected $primaryKey = "id";
+    public function booking()
+    {
+        return $this->belongsTo(BookingModel::class);
+    }
+    public function service()
+    {
+        return $this->belongsTo(ServiceModel::class);
+    }
+
 }
